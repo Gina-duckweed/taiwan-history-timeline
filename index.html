@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>臺灣歷史長河</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Huninn&family=Noto+Sans+TC:wght@400;500;700;900&family=Fredoka:wght@500;600;700&display=swap">
+<style>
+/* Layout: 明亮的「繪本放映台」— 小藍鵲導覽員＋大年份＋插畫事件卡，下方彩色百年軌道與完整年表 */
+:root{
+  --bg:#F2FAFF; --sky:#D9F0FF; --paper:#FFFFFF; --ink:#1D2B45; --muted:#5B6B85; --line:#CFE3F2;
+  --sun:#FFC93C; --pink:#FF7AA2; --accent:#2B6CD9;
+  --era1:#F59E2B; --era2:#F25C54; --era3:#6C7BF2; --era4:#16B8A6; --era5:#A25DDC;
+  --c-zh:#2B6CD9; --c-jj:#F59E2B; --c-sh:#F25C8B; --c-wh:#A25DDC; --c-zz:#E6533C; --c-gj:#16B8A6;
+  --f-display:"Huninn","Noto Sans TC","PingFang TC",sans-serif;
+  --f-body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --f-num:"Fredoka","Noto Sans TC",ui-rounded,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#13203A; --sky:#1B2B4C; --paper:#1F3157; --ink:#F2F6FF; --muted:#A9B8D6; --line:#2E4370;
+  --sun:#FFD45C; --pink:#FF8FB1; --accent:#6EA8FF;
+  --era1:#FFB24D; --era2:#FF7A72; --era3:#8F9BFF; --era4:#3DD9C5; --era5:#C38BFF;
+  --c-zh:#6EA8FF; --c-jj:#FFB24D; --c-sh:#FF8FB1; --c-wh:#C38BFF; --c-zz:#FF7A60; --c-gj:#3DD9C5; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#13203A; --sky:#1B2B4C; --paper:#1F3157; --ink:#F2F6FF; --muted:#A9B8D6; --line:#2E4370;
+  --sun:#FFD45C; --pink:#FF8FB1; --accent:#6EA8FF;
+  --era1:#FFB24D; --era2:#FF7A72; --era3:#8F9BFF; --era4:#3DD9C5; --era5:#C38BFF;
+  --c-zh:#6EA8FF; --c-jj:#FFB24D; --c-sh:#FF8FB1; --c-wh:#C38BFF; --c-zz:#FF7A60; --c-gj:#3DD9C5; color-scheme:dark}
+/* 九個時代色 */
+:root{--e1:#36B26B;--e2:#2EA3DB;--e3:#D9A400;--e4:#E2627C;--e5:#F5862B;--e6:#B9549E;--e7:#6C7BF2;--e8:#16B8A6;--e9:#8E5BDC;--c-kg:#36B26B}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--e1:#5ED68E;--e2:#5CC4F2;--e3:#F2C84B;--e4:#FF8FA6;--e5:#FFA65C;--e6:#E07CC4;--e7:#8F9BFF;--e8:#3DD9C5;--e9:#B68BFF;--c-kg:#5ED68E}}
+:root[data-theme="dark"]{--e1:#5ED68E;--e2:#5CC4F2;--e3:#F2C84B;--e4:#FF8FA6;--e5:#FFA65C;--e6:#E07CC4;--e7:#8F9BFF;--e8:#3DD9C5;--e9:#B68BFF;--c-kg:#5ED68E}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.65;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 64px;
+  background-image:radial-gradient(circle at 8% 4%,var(--sky) 0 120px,transparent 121px),radial-gradient(circle at 96% 10%,var(--sky) 0 80px,transparent 81px)}
+.wrap{max-width:1080px;margin:0 auto;display:flex;flex-direction:column;gap:24px}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px}
+h1{font-family:var(--f-display);font-weight:400;font-size:clamp(32px,5.5vw,50px);line-height:1.1;margin:0;letter-spacing:.04em;text-wrap:balance}
+h1 .hl{background:linear-gradient(transparent 62%,var(--sun) 62%);padding:0 .08em}
+h1 small{font-family:var(--f-num);font-weight:600;font-size:.42em;color:var(--accent);letter-spacing:.04em;margin-left:.5em}
+.sub{color:var(--muted);margin:0;max-width:32em;font-size:14px}
+
+/* Stage */
+.stage{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:22px;align-items:stretch}
+@media (max-width:780px){.stage{grid-template-columns:1fr;gap:14px}}
+.clock{background:var(--paper);border-radius:24px;padding:18px 20px;display:flex;flex-direction:column;gap:4px;position:relative;min-width:0;border:2px solid var(--line)}
+.era-now{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;font-family:var(--f-display);font-size:16px;color:#fff;background:var(--era-c,var(--era1));padding:3px 14px;border-radius:999px;transition:background .4s}
+.year{font-family:var(--f-num);font-weight:700;font-size:clamp(78px,13vw,128px);line-height:1;letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin:4px 0 0;color:var(--era-c,var(--era1));transition:color .4s;text-shadow:4px 4px 0 var(--sky)}
+.year.long{font-size:clamp(46px,7.5vw,76px);line-height:1.15;letter-spacing:0}
+.cal{font-family:var(--f-num);font-size:14px;color:var(--muted);letter-spacing:.04em}
+.guide{display:flex;align-items:flex-end;gap:10px;margin-top:10px}
+.guide svg{width:92px;height:auto;flex:none}
+.bubble{position:relative;background:var(--sky);border-radius:16px;padding:8px 12px;font-family:var(--f-display);font-size:15px;line-height:1.4;margin-bottom:28px;min-width:0}
+.bubble::after{content:"";position:absolute;left:-8px;bottom:10px;border:8px solid transparent;border-right-color:var(--sky);border-left:0}
+.hop{animation:hop .6s cubic-bezier(.3,1.6,.5,1)}
+@keyframes hop{0%,100%{transform:none}40%{transform:translateY(-14px) rotate(-6deg)}}
+
+.card{background:var(--paper);border:2px solid var(--line);border-radius:24px;padding:20px 22px;min-height:260px;display:grid;grid-template-columns:150px minmax(0,1fr);gap:18px;align-items:center;position:relative;overflow:hidden;min-width:0}
+@media (max-width:520px){.card{grid-template-columns:1fr;justify-items:start}.art{width:110px!important;height:110px!important}}
+.art{width:150px;height:150px;border-radius:50%;background:var(--era-c,var(--era1));display:grid;place-items:center;position:relative;transition:background .4s;box-shadow:inset 0 -10px 0 rgba(0,0,0,.08)}
+.art svg{width:72%;height:72%;overflow:visible}
+.art::after{content:"";position:absolute;right:6%;top:6%;width:22%;height:22%;border-radius:50%;background:var(--sun);opacity:.9}
+.txt{display:flex;flex-direction:column;gap:8px;min-width:0}
+.meta{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-family:var(--f-num);font-size:13.5px;color:var(--muted)}
+.chip{color:#fff;padding:1px 10px;border-radius:999px;font-family:var(--f-body);font-weight:700;font-size:12px;letter-spacing:.06em;background:var(--chip,var(--accent))}
+.card h2{font-family:var(--f-display);font-weight:400;font-size:clamp(24px,3.4vw,32px);line-height:1.3;margin:0;text-wrap:balance}
+.card p{margin:0;max-width:36em}
+.count{font-family:var(--f-num);font-size:12.5px;color:var(--muted)}
+.card.in .art{animation:pop .65s cubic-bezier(.3,1.5,.5,1) both}
+.card.in .txt>*{animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+.card.in .txt>*:nth-child(2){animation-delay:.07s}.card.in .txt>*:nth-child(3){animation-delay:.14s}
+@keyframes pop{from{transform:scale(.4) rotate(-20deg);opacity:0}to{transform:none;opacity:1}}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+/* Icon parts */
+.i-k{fill:none;stroke:#1D2B45;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.i-w{fill:#FFFFFF;stroke:#1D2B45;stroke-width:3;stroke-linejoin:round}
+.i-y{fill:#FFC93C;stroke:#1D2B45;stroke-width:3;stroke-linejoin:round}
+.i-p{fill:#FF7AA2;stroke:#1D2B45;stroke-width:3;stroke-linejoin:round}
+.i-b{fill:#6FC3FF;stroke:#1D2B45;stroke-width:3;stroke-linejoin:round}
+.i-g{fill:#7BD88F;stroke:#1D2B45;stroke-width:3;stroke-linejoin:round}
+.i-d{fill:#1D2B45}
+
+/* Track */
+.track-box{background:var(--paper);border:2px solid var(--line);border-radius:24px;padding:14px 18px 10px;display:flex;flex-direction:column;gap:6px}
+.controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button{font:inherit;font-size:14px;font-weight:700;color:var(--ink);background:var(--sky);border:0;border-radius:999px;padding:8px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:6px;transition:transform .15s}
+button:hover{transform:translateY(-2px)}
+button:focus-visible,.track:focus-visible,.row:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+button.primary{background:var(--pink);color:#fff;min-width:100px;justify-content:center;box-shadow:0 4px 0 rgba(0,0,0,.12)}
+.speed{display:flex;background:var(--sky);border-radius:999px;padding:3px}
+.speed button{padding:5px 11px;font-family:var(--f-num);font-size:13px;background:transparent}
+.speed button[aria-pressed="true"]{background:var(--accent);color:#fff}
+.hint{color:var(--muted);font-size:12.5px;margin-left:auto}
+@media (max-width:600px){.hint{display:none}}
+.track{position:relative;height:118px;cursor:pointer;touch-action:none;user-select:none}
+.bands{position:absolute;left:0;right:0;top:62px;height:16px;display:flex;border-radius:999px;overflow:hidden}
+.bands div{height:100%}
+.fill{position:absolute;left:0;top:62px;height:16px;border-radius:999px;background:repeating-linear-gradient(-45deg,rgba(255,255,255,.45) 0 6px,transparent 6px 12px);pointer-events:none}
+.dots{position:absolute;left:0;right:0;top:66px;height:8px}
+.dot{position:absolute;width:8px;height:8px;margin-left:-4px;border-radius:50%;background:#fff;opacity:.75;transition:transform .3s,background .3s}
+.dot.past{opacity:1}
+.dot.cur{background:var(--sun);transform:scale(2.1);box-shadow:0 0 0 1.5px #1D2B45}
+.ticks{position:absolute;left:0;right:0;top:84px;height:30px}
+.tick{position:absolute;transform:translateX(-50%);font-family:var(--f-num);font-weight:500;font-size:12px;color:var(--muted)}
+.tick.first{transform:none}.tick.last{transform:translateX(-100%)}
+.brk{position:absolute;top:58px;width:2px;height:24px;margin-left:-1px;background:var(--paper);transform:skewX(-20deg);pointer-events:none}
+.scale-note{font-size:12px;color:var(--muted)}
+@media (max-width:560px){.tick.odd{display:none}}
+.head{position:absolute;top:0;width:56px;margin-left:-28px;pointer-events:none}
+.head svg{width:56px;height:auto;display:block;transition:transform .2s}
+.head.flip svg{transform:scaleX(-1)}
+.head::after{content:"";position:absolute;left:50%;top:50px;width:3px;height:30px;margin-left:-1.5px;background:var(--ink);border-radius:2px}
+.ripple{position:absolute;top:70px;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;border:3px solid var(--sun);pointer-events:none;animation:rip 1s ease-out forwards}
+@keyframes rip{to{transform:scale(5);opacity:0}}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend b{width:14px;height:14px;border-radius:50%;display:inline-block}
+
+/* List */
+.list{display:flex;flex-direction:column;gap:22px}
+.era-sec{background:var(--paper);border-radius:24px;padding:18px 18px 10px;border:2px solid var(--line);border-top:8px solid var(--era-c)}
+.era-sec h3{font-family:var(--f-display);font-weight:400;font-size:24px;margin:0;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;color:var(--era-c)}
+.era-sec h3 em{font-style:normal;font-family:var(--f-num);font-size:14px;color:var(--muted)}
+.era-sec .lede{color:var(--muted);font-size:14px;margin:2px 0 10px;max-width:44em}
+.row{display:grid;grid-template-columns:44px 64px minmax(0,1fr) auto;gap:2px 14px;padding:10px 8px;border-radius:16px;cursor:pointer;align-items:center}
+.row:hover{background:var(--sky)}
+.row.cur{background:var(--sky);box-shadow:inset 0 0 0 2px var(--sun)}
+.row .ic{width:44px;height:44px;border-radius:50%;background:var(--era-c);display:grid;place-items:center;grid-row:span 2;align-self:start}
+.row .ic svg{width:30px;height:30px;overflow:visible}
+.row .y{font-family:var(--f-num);font-weight:600;font-variant-numeric:tabular-nums;line-height:1.2}
+.row .y small{display:block;font-weight:500;font-size:11.5px;color:var(--muted)}
+.row .t{font-weight:700}
+.row .d{grid-column:2/5;color:var(--muted);font-size:14px}
+.row .chip{justify-self:end}
+@media (max-width:560px){.row{grid-template-columns:40px 52px minmax(0,1fr)}.row .chip{display:none}.row .d{grid-column:2/4}.row .ic{width:40px;height:40px}}
+footer{color:var(--muted);font-size:12.5px;padding-top:4px}
+@media (prefers-reduced-motion:reduce){.card.in .art,.card.in .txt>*,.ripple,.hop{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <h1><span class="hl">臺灣歷史長河</span><small>史前 — 2026</small></h1>
+    <p class="sub">跟著小藍鵲，從遠古的澎湖原人一路飛到今天，認識形塑臺灣的 <span id="nEv">100</span> 個關鍵時刻。可自動播放，也能拖曳時間軸到任一時代。</p>
+  </header>
+
+  <section class="stage" aria-live="polite">
+    <div class="clock" id="clock">
+      <span class="era-now" id="eraNow">史前時代</span>
+      <p class="year long" id="year">5 萬年前</p>
+      <div class="cal" id="cal">舊石器時代 · 考古推定</div>
+      <div class="guide">
+        <svg id="guideBird" viewBox="0 0 120 90" aria-hidden="true"></svg>
+        <div class="bubble" id="bubble">嗨！我是小藍鵲，帶你飛過一百年～</div>
+      </div>
+    </div>
+    <article class="card" id="card">
+      <div class="art" id="art"></div>
+      <div class="txt">
+        <div class="meta"><span id="cDate">史前</span><span class="chip" id="cCat">序</span></div>
+        <h2 id="cTitle">故事，從一塊化石開始</h2>
+        <p id="cDesc">在還沒有文字的年代，臺灣已經有人類活動。按「播放」從史前一路走到 2026 年，每遇到一件大事就停下來說明。</p>
+        <div class="count" id="cCount">共 100 件</div>
+      </div>
+    </article>
+  </section>
+
+  <section class="track-box">
+    <div class="controls">
+      <button class="primary" id="play" aria-label="播放">▶ 播放</button>
+      <button id="prev" aria-label="上一個事件">◀ 上一件</button>
+      <button id="next" aria-label="下一個事件">下一件 ▶</button>
+      <div class="speed" role="group" aria-label="播放速度">
+        <button data-s="1" aria-pressed="true">1×</button><button data-s="2" aria-pressed="false">2×</button><button data-s="4" aria-pressed="false">4×</button>
+      </div>
+      <button id="restart">↺ 從頭開始</button>
+      <span class="hint">空白鍵：播放／暫停　← →：上一件／下一件</span>
+    </div>
+    <div class="track" id="track" tabindex="0" role="slider" aria-label="時間位置" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="bands" id="bands"></div>
+      <div class="fill" id="fill"></div>
+      <div class="dots" id="dots"></div>
+      <div class="ticks" id="ticks"></div>
+      <div class="head" id="head"><svg id="trackBird" viewBox="0 0 120 90" aria-hidden="true"></svg></div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="scale-note">時間軸比例：越接近現代越放大。史前數萬年壓縮在左側，1945 年以後占將近一半。</div>
+  </section>
+
+  <section class="list" id="list"></section>
+
+  <footer>年份下的小字為當時臺灣通行紀年：明鄭用永曆、清領用清朝年號、日治用日本年號、戰後用民國紀年；史前年代為考古推定，各家說法略有出入。導覽角色「小藍鵲」以臺灣特有種臺灣藍鵲為靈感原創繪製。事件敘述力求簡要，深入研究請參考專書與檔案。</footer>
+</div>
+
+<script>
+const END=2026.8;
+// 原創角色：小藍鵲（臺灣藍鵲）
+const BIRD=`<path d="M8 52 C20 50 34 50 46 54 L44 62 C32 62 18 60 6 60 Z" fill="#2B6CD9" stroke="#1D2B45" stroke-width="3" stroke-linejoin="round"/>
+<path d="M6 52 h10 v8 h-10z" fill="#fff" stroke="#1D2B45" stroke-width="3"/>
+<ellipse cx="62" cy="54" rx="24" ry="19" fill="#2B6CD9" stroke="#1D2B45" stroke-width="3"/>
+<path d="M50 52 q12 10 26 0" fill="#6FC3FF" stroke="#1D2B45" stroke-width="3" stroke-linecap="round"/>
+<circle cx="84" cy="34" r="17" fill="#1D2B45"/>
+<circle cx="89" cy="31" r="6" fill="#fff"/><circle cx="90" cy="31" r="3" fill="#1D2B45"/><circle cx="91" cy="29.5" r="1.1" fill="#fff"/>
+<path d="M99 34 L114 38 L99 42 Z" fill="#E6533C" stroke="#1D2B45" stroke-width="2.5" stroke-linejoin="round"/>
+<circle cx="80" cy="42" r="3.4" fill="#FF7AA2" opacity=".85"/>
+<path d="M56 72 v10 M68 72 v10 M52 83 h8 M64 83 h8" stroke="#E6533C" stroke-width="3.5" stroke-linecap="round"/>`;
+$=id=>document.getElementById(id);
+$("guideBird").innerHTML=BIRD;$("trackBird").innerHTML=BIRD;
+
+// 圖示（64×64，原創簡筆插畫）
+const I={
+rice:`<path class="i-w" d="M18 30c0-12 28-12 28 0z"/><path class="i-p" d="M8 30h48a24 22 0 0 1-48 0z"/><path class="i-k" d="M40 8l14 18M46 6l12 18"/>`,
+farm:`<path class="i-g" d="M6 50c10-8 42-8 52 0v8H6z"/><path class="i-k" d="M20 48V26M20 26c-6-2-8-8-8-12 6 0 8 6 8 12zM20 30c6-2 8-8 8-12-6 0-8 6-8 12zM44 48V30M44 30c-5-2-7-7-7-10 5 0 7 5 7 10zM44 33c5-2 7-7 7-10-5 0-7 5-7 10z"/><circle class="i-y" cx="52" cy="12" r="6"/>`,
+people:`<circle class="i-y" cx="22" cy="20" r="8"/><circle class="i-p" cx="42" cy="20" r="8"/><path class="i-b" d="M8 54c0-14 8-22 14-22s14 8 14 22z"/><path class="i-w" d="M28 54c0-14 8-22 14-22s14 8 14 22z"/>`,
+vote:`<path class="i-w" d="M22 8h20v26H22z"/><path class="i-k" d="M27 18l4 4 7-8"/><path class="i-b" d="M8 30h48v26H8z"/><path class="i-k" d="M18 30h28"/>`,
+flag:`<path class="i-k" d="M16 58V6"/><path class="i-p" d="M16 8c10-4 18 4 30 0v22c-12 4-20-4-30 0z"/><circle class="i-y" cx="32" cy="18" r="4"/>`,
+water:`<path class="i-b" d="M32 6c10 14 18 22 18 32a18 18 0 0 1-36 0c0-10 8-18 18-32z"/><path class="i-k" d="M24 40a8 8 0 0 0 8 8"/>`,
+dam:`<path class="i-w" d="M10 20h44l-6 38H16z"/><path class="i-b" d="M4 56c6-4 10 4 16 0s10 4 16 0 10 4 16 0 10 4 8 0v4H4z"/><path class="i-k" d="M22 28h20M24 38h16"/>`,
+power:`<path class="i-y" d="M36 4L14 36h16l-4 24 24-34H34z"/>`,
+mountain:`<path class="i-g" d="M4 56L24 20l10 16 8-10 18 30z"/><path class="i-w" d="M24 20l-6 11 6 3 6-4z"/><path class="i-k" d="M28 60c0-8 8-8 8-16"/>`,
+quake:`<path class="i-w" d="M14 30L32 14l18 16v26H14z"/><path class="i-p" d="M26 56V42h12v14"/><path class="i-k" d="M4 60l8-6 6 6 8-6 6 6 8-6 6 6 8-6 6 6M6 22l4 4M58 22l-4 4"/>`,
+storm:`<path class="i-w" d="M18 36a10 10 0 0 1 2-20 14 14 0 0 1 26 2 9 9 0 0 1 0 18z"/><path class="i-k" d="M20 44l-4 8M32 44l-4 8M44 44l-4 8M26 54l-3 6M38 54l-3 6"/>`,
+fair:`<path class="i-p" d="M8 26L32 8l24 18z"/><path class="i-w" d="M12 26h40v30H12z"/><path class="i-y" d="M26 56V38h12v18"/><path class="i-k" d="M18 32v8M46 32v8"/>`,
+plane:`<path class="i-w" d="M6 34l50-14c4 0 4 6 0 8L10 40z"/><path class="i-b" d="M26 30l-8-18h8l14 14M30 36l-6 16h8l10-18"/>`,
+peace:`<path class="i-w" d="M32 54C14 42 8 32 8 22a12 12 0 0 1 24-4 12 12 0 0 1 24 4c0 10-6 20-24 32z"/><path class="i-k" d="M20 26c4 6 20 6 24 0"/>`,
+candle:`<path class="i-w" d="M24 28h16v30H24z"/><path class="i-y" d="M32 6c6 8 6 14 0 18-6-4-6-10 0-18z"/><path class="i-k" d="M32 24v4"/>`,
+lock:`<path class="i-k" d="M20 28v-8a12 12 0 0 1 24 0v8"/><path class="i-y" d="M12 28h40v28H12z"/><circle class="i-d" cx="32" cy="40" r="4"/><path class="i-k" d="M32 42v6"/>`,
+unlock:`<path class="i-k" d="M20 28v-8a12 12 0 0 1 24 0"/><path class="i-g" d="M12 28h40v28H12z"/><circle class="i-d" cx="32" cy="40" r="4"/><path class="i-k" d="M32 42v6"/>`,
+coin:`<circle class="i-y" cx="32" cy="32" r="24"/><circle class="i-k" cx="32" cy="32" r="16"/><path class="i-k" d="M32 22v20M26 28h12M26 36h12"/>`,
+ship:`<path class="i-w" d="M8 40h48l-8 14H16z"/><path class="i-b" d="M20 40V26h22v14"/><path class="i-k" d="M30 26V14M30 14l10 6"/><path class="i-k" d="M4 60c6-3 10 3 16 0s10 3 16 0 10 3 16 0 8 3 8 0"/>`,
+globe:`<circle class="i-b" cx="32" cy="32" r="24"/><path class="i-g" d="M18 18c6 2 10 8 6 14s4 10 2 18c-8-4-14-14-12-24zM40 12c4 6 12 6 14 14-6 2-10-2-14 2s-6-8 0-16z"/><path class="i-k" d="M8 32h48"/>`,
+shield:`<path class="i-b" d="M32 6l22 8v16c0 14-10 24-22 28C20 54 10 44 10 30V14z"/><path class="i-y" d="M32 18l4 8 9 1-7 6 2 9-8-5-8 5 2-9-7-6 9-1z"/>`,
+tv:`<path class="i-k" d="M24 6l8 10 8-10"/><path class="i-p" d="M6 16h52v36H6z"/><path class="i-w" d="M12 22h32v24H12z"/><circle class="i-y" cx="51" cy="28" r="3"/><circle class="i-y" cx="51" cy="38" r="3"/>`,
+factory:`<path class="i-w" d="M6 56V30l14 8v-8l14 8v-8l14 8V14h10v42z"/><path class="i-y" d="M14 46h6v10h-6zM30 46h6v10h-6z"/><circle class="i-w" cx="54" cy="8" r="4"/>`,
+baseball:`<circle class="i-w" cx="30" cy="34" r="20"/><path class="i-p" d="M16 20c6 6 6 22 0 28M44 20c-6 6-6 22 0 28"/><path class="i-y" d="M48 6l10 4-12 18-6-4z"/>`,
+book:`<path class="i-w" d="M32 14C24 8 14 8 6 10v38c8-2 18-2 26 4z"/><path class="i-y" d="M32 14c8-6 18-6 26-4v38c-8-2-18-2-26 4z"/><path class="i-k" d="M12 20h12M12 28h12M40 20h12M40 28h12"/>`,
+road:`<path class="i-g" d="M4 58L26 10h12l22 48z"/><path class="i-w" d="M14 58L28 10h8l14 48z"/><path class="i-k" d="M32 18v6M32 32v8M32 48v8"/>`,
+plane2:`<path class="i-w" d="M30 6c4 0 4 6 4 10v12l22 12v6L34 40v10l8 6v4l-10-3-10 3v-4l8-6V40L8 46v-6l22-12V16c0-4 0-10 4-10z"/>`,
+chip:`<path class="i-y" d="M16 16h32v32H16z"/><path class="i-w" d="M24 24h16v16H24z"/><path class="i-k" d="M22 8v8M32 8v8M42 8v8M22 48v8M32 48v8M42 48v8M8 22h8M8 32h8M8 42h8M48 22h8M48 32h8M48 42h8"/>`,
+news:`<path class="i-w" d="M8 12h40v40H14a6 6 0 0 1-6-6z"/><path class="i-y" d="M48 22h8v24a6 6 0 0 1-6 6h-2z"/><path class="i-k" d="M16 20h24M16 28h10M16 36h24M16 44h24"/><path class="i-p" d="M30 26h10v6H30z"/>`,
+lily:`<path class="i-k" d="M32 60V34"/><path class="i-w" d="M32 34C22 30 16 18 18 8c6 4 10 10 14 16 4-6 8-12 14-16 2 10-4 22-14 26z"/><path class="i-g" d="M32 50c-8 0-12-6-14-10 8 0 12 4 14 10z"/>`,
+scroll:`<path class="i-w" d="M14 10h32v44H14z"/><path class="i-y" d="M10 6h40v8H10zM10 50h40v8H10z"/><path class="i-k" d="M22 24h16M22 32h16M22 40h10"/>`,
+health:`<path class="i-p" d="M24 6h16v18h18v16H40v18H24V40H6V24h18z"/>`,
+metro:`<path class="i-b" d="M14 8h36a6 6 0 0 1 6 6v32H8V14a6 6 0 0 1 6-6z"/><path class="i-w" d="M14 16h36v14H14z"/><circle class="i-y" cx="18" cy="38" r="3"/><circle class="i-y" cx="46" cy="38" r="3"/><path class="i-k" d="M16 46l-6 12M48 46l6 12"/>`,
+handshake:`<path class="i-y" d="M4 30l14-12 14 8 14-8 14 12-26 20z"/><path class="i-k" d="M24 34l6 6M30 30l6 6"/>`,
+mask:`<path class="i-b" d="M12 22c12-6 28-6 40 0v14c-6 12-34 12-40 0z"/><path class="i-k" d="M12 26H4M52 26h8M12 32H6M52 32h6M20 28h24M20 34h24"/>`,
+tower:`<path class="i-g" d="M26 58h12L36 46h-8z"/><path class="i-g" d="M24 46h16l-2-10H26zM24 36h16l-2-10H26zM24 26h16l-2-10H26z"/><path class="i-k" d="M32 16V4"/>`,
+hsr:`<path class="i-w" d="M4 40c0-16 14-22 30-22h12c8 0 14 8 14 22z"/><path class="i-b" d="M8 34c4-8 12-10 22-10h6v10z"/><path class="i-p" d="M4 40h56v6H4z"/><path class="i-k" d="M2 54h60"/>`,
+sun:`<circle class="i-y" cx="32" cy="32" r="12"/><path class="i-k" d="M32 6v8M32 50v8M6 32h8M50 32h8M13 13l6 6M45 45l6 6M13 51l6-6M45 19l6-6"/>`,
+sunflower:`<path class="i-k" d="M32 60V36"/><g class="i-y"><ellipse cx="32" cy="12" rx="5" ry="9"/><ellipse cx="32" cy="40" rx="5" ry="9"/><ellipse cx="18" cy="26" rx="9" ry="5"/><ellipse cx="46" cy="26" rx="9" ry="5"/></g><circle cx="32" cy="26" r="8" fill="#8A5A2B" stroke="#1D2B45" stroke-width="3"/>`,
+woman:`<circle class="i-y" cx="32" cy="18" r="10"/><path class="i-k" d="M22 16c0-10 20-10 20 0"/><path class="i-p" d="M14 58c0-16 8-26 18-26s18 10 18 26z"/>`,
+medal:`<path class="i-b" d="M20 4h8l6 18h-8zM44 4h-8l-6 18h8z"/><circle class="i-y" cx="32" cy="40" r="16"/><path class="i-k" d="M32 32v16M28 34l4-2"/>`,
+rainbow:`<path d="M6 48a26 26 0 0 1 52 0" fill="none" stroke="#F25C54" stroke-width="5"/><path d="M12 48a20 20 0 0 1 40 0" fill="none" stroke="#FFC93C" stroke-width="5"/><path d="M18 48a14 14 0 0 1 28 0" fill="none" stroke="#7BD88F" stroke-width="5"/><path d="M24 48a8 8 0 0 1 16 0" fill="none" stroke="#6FC3FF" stroke-width="5"/><path class="i-p" d="M32 40c-6-4-8-8-6-11 2-2 5-1 6 1 1-2 4-3 6-1 2 3 0 7-6 11z"/>`,
+leaf:`<path class="i-g" d="M10 54C10 26 30 10 56 8c0 26-16 46-44 46z"/><path class="i-k" d="M12 52L42 22"/>`,
+bone:`<path class="i-w" d="M6 22c0 20 12 32 26 32s26-12 26-32l-9-3c0 13-7 22-17 22S15 32 15 19z"/><path class="i-k" d="M22 40v-5M28 43v-5M36 43v-5M42 40v-5"/>`,
+axe:`<path class="i-k" d="M18 58L42 12"/><path class="i-w" d="M30 16c8-8 22-6 28 4l-10 10c-6-5-12-6-18-3z"/>`,
+pot:`<path class="i-p" d="M18 10h28v7c8 6 11 14 9 23-2 10-11 16-23 16S11 50 9 40c-2-9 1-17 9-23z"/><path class="i-k" d="M13 32c6 2 11-2 19 0s13 2 19 0M13 41c6 2 11-2 19 0s13 2 19 0"/>`,
+jade:`<path d="M27 12.6A20 20 0 1 0 37 12.6" fill="none" stroke="#1D2B45" stroke-width="14"/><path d="M27 12.6A20 20 0 1 0 37 12.6" fill="none" stroke="#7BD88F" stroke-width="8"/>`,
+furnace:`<path class="i-w" d="M16 58V28c0-12 32-12 32 0v30z"/><path class="i-y" d="M32 52c-7 0-9-7-4-13 2 4 4 2 4-5 7 5 9 12 4 16z"/><path class="i-k" d="M8 58h48"/>`,
+hut:`<path class="i-y" d="M4 34L32 8l28 26z"/><path class="i-w" d="M13 34h38v22H13z"/><path class="i-p" d="M28 56V42h8v14"/><path class="i-k" d="M20 18l-6-8M44 18l6-8"/>`,
+fort:`<path class="i-p" d="M10 26h8v-6h6v6h4v-6h8v6h4v-6h6v6h8v32H10z"/><path class="i-w" d="M26 58V46a6 6 0 0 1 12 0v12"/><path class="i-k" d="M32 20V4l10 4-10 4"/>`,
+temple:`<path class="i-p" d="M2 26C12 22 22 14 32 8c10 6 20 14 30 18z"/><path class="i-y" d="M10 26h44v6H10z"/><path class="i-w" d="M15 32h34v24H15z"/><path class="i-k" d="M24 32v24M40 32v24"/>`,
+sword:`<path class="i-w" d="M44 6h14v14L30 48 16 34z"/><path class="i-y" d="M12 34l18 18-5 5L7 39z"/><path class="i-k" d="M14 52l-8 8"/>`,
+tea:`<path class="i-w" d="M8 30h38v6c0 12-8 20-19 20S8 48 8 36z"/><path class="i-k" d="M46 34h4a6 6 0 0 1 0 12h-6"/><path class="i-g" d="M20 24c-4-10 4-18 17-18 0 12-8 18-17 18z"/>`,
+steam:`<path class="i-w" d="M6 20h20v26H6z"/><path class="i-p" d="M26 30h30v16H26z"/><path class="i-k" d="M38 30v-9h7v9"/><circle class="i-y" cx="14" cy="50" r="6"/><circle class="i-y" cx="34" cy="50" r="6"/><circle class="i-y" cx="50" cy="50" r="5"/><circle class="i-w" cx="48" cy="10" r="5"/>`,
+};
+const icon=k=>`<svg viewBox="0 0 64 64" aria-hidden="true">${I[k]||I.flag}</svg>`;
+const CAT={"考古":"--c-kg","政治":"--c-zh","經濟":"--c-jj","社會":"--c-sh","文化":"--c-wh","災害":"--c-zz","國際":"--c-gj"};
+const SAY={"考古":["哇，好古老！","考古學家挖到寶了！","那時候還沒有文字喔～"],"政治":["政治大轉彎！","這件事改變了好多人的命運。","民主的路一步一步走。"],"經濟":["建設起來！","經濟引擎發動～","賺錢養家的大事！"],"社會":["大家一起站出來！","社會正在改變喔。","這和每個人的生活都有關。"],"文化":["好熱鬧啊！","全臺灣都在看！","一起來玩吧～"],"災害":["大家要平安…","一起互相幫忙重建！","天災考驗著臺灣。"],"國際":["世界局勢變了！","臺灣和世界的關係在改變。","從島上看向世界～"]};
+
+const ERAS=[
+  {n:"史前時代",s:-50000,e:1600,c:"--e1",r:"約 5 萬年前–1600",lede:"沒有文字的漫長歲月。從舊石器時代的洞穴採集者，到新石器時代的農耕聚落、金屬器時代的煉鐵技術，南島語族祖先在這座島上落地生根。"},
+  {n:"大航海時代",s:1600,e:1662.1,c:"--e2",r:"1600–1662",lede:"東亞海域貿易興盛，荷蘭與西班牙先後在臺灣建立據點，臺灣第一次被捲入全球貿易網絡。"},
+  {n:"明鄭時期",s:1662.1,e:1683.7,c:"--e3",r:"1662–1683",lede:"鄭成功驅逐荷蘭人，鄭氏三代在臺建立政權，引進漢人典章制度與教育。"},
+  {n:"清領時期",s:1683.7,e:1895.45,c:"--e4",r:"1683–1895",lede:"清廷將臺灣納入版圖兩百餘年。漢人大量移墾，民變與械鬥頻繁；晚清開港通商、建省，展開初步現代化。"},
+  {n:"日治時期",s:1895.45,e:1945.62,c:"--e5",r:"1895–1945",lede:"殖民現代化與社會運動並進：鐵路、水利、電力、米糖經濟成形，臺灣人以武裝抗日、結社與請願爭取權利；戰爭末期全面動員。"},
+  {n:"戰後接收",s:1945.62,e:1949.38,c:"--e6",r:"1945–1949",lede:"日本投降，國民政府接收臺灣。通膨、治理失序與族群衝突交織，爆發二二八事件。"},
+  {n:"戒嚴時期",s:1949.38,e:1987.54,c:"--e7",r:"1949–1987",lede:"中央政府遷臺，實施長達 38 年的戒嚴。冷戰下獲美援、土地改革與出口導向工業化，締造經濟奇蹟，同時壓制異議。"},
+  {n:"民主轉型",s:1987.54,e:2000.38,c:"--e8",r:"1987–2000",lede:"解嚴、解除報禁、國會全面改選，到總統直選。臺灣在沒有流血革命的情況下完成民主化。"},
+  {n:"政黨輪替以降",s:2000.38,e:END,c:"--e9",r:"2000–今",lede:"政黨輪替成為常態，半導體產業躍居全球關鍵；公民運動、天災與疫情考驗社會韌性。"}
+];
+// [年, 月(0=不詳), 標題, 說明, 類別, 圖示, 長標示, 短標示]
+const RAW=[
+[-48000,0,"澎湖原人","漁民在澎湖水道撈獲的古人類下顎骨化石，2025 年經古蛋白分析確認屬於丹尼索瓦人，是臺灣目前所知最古老的人類化石。","考古","bone","約 1～19 萬年前","萬年前"],
+[-28000,0,"長濱文化","臺東八仙洞遺址出土大量打製石器，是臺灣已知最早的舊石器文化，當時的人以採集、狩獵、捕魚維生。","考古","axe","約 3 萬～5 千年前","3萬年前"],
+[-18000,0,"左鎮人","臺南左鎮菜寮溪出土的人類頭骨碎片，過去推定約 2～3 萬年前，近年的定年研究對年代仍有討論。","考古","bone","過去推定約 2～3 萬年前","2萬年前"],
+[-4000,0,"大坌坑文化","臺灣最早的新石器文化，以粗繩紋陶器為特徵，開始農耕定居。學界常認為與南島語族的祖先有關。","考古","pot","約 6,000～4,500 年前","6千年前"],
+[-1500,0,"卑南文化","臺東卑南遺址出土上千具石板棺與精美玉器，是環太平洋地區規模最大的石板棺墓葬群之一。臺灣玉也曾遠銷東南亞。","考古","jade","約 3,500～2,300 年前","3千年前"],
+[300,0,"十三行文化","新北八里的十三行遺址顯示當時已會煉鐵，並出土來自外地的錢幣與珠飾，進入金屬器時代。","考古","furnace","約 1,800～500 年前","千餘年前"],
+[1500,0,"南島語族部落社會","在外來政權到來之前，原住民族各族群已分布全島，形成語言、文化多元的部落社會。","社會","hut","16 世紀以前","16世紀"],
+[1603,0,"陳第《東番記》","明朝人陳第隨軍來臺後寫下《東番記》，記錄西南平原原住民的生活，是最早描述臺灣的漢文實地紀錄之一。","文化","book"],
+[1624,8,"荷蘭人據大員","荷蘭東印度公司在大員（今臺南安平）建立據點，興建熱蘭遮城，展開 38 年的統治。","國際","fort"],
+[1626,5,"西班牙人據北臺灣","西班牙人在雞籠（今基隆）和平島建聖薩爾瓦多城，之後擴及淡水。","國際","fort"],
+[1642,8,"荷蘭驅逐西班牙","荷蘭攻下雞籠，西班牙勢力退出臺灣。","國際","ship"],
+[1652,9,"郭懷一事件","赤崁地區漢人不滿荷蘭重稅起事，遭荷蘭人聯合原住民鎮壓，數千人死亡。","社會","sword"],
+[1662,2,"鄭成功驅逐荷蘭","鄭成功率軍圍攻熱蘭遮城九個月，荷蘭人投降離臺，明鄭政權建立。","政治","ship"],
+[1666,0,"全臺首學：臺南孔廟","陳永華建議興建孔廟與明倫堂，開啟臺灣儒學教育。","文化","temple"],
+[1683,8,"明鄭降清","施琅率清軍於澎湖海戰擊敗鄭軍，鄭克塽投降，明鄭結束。","政治","flag"],
+[1684,5,"設臺灣府","清廷將臺灣納入版圖，設一府三縣，隸屬福建省。","政治","scroll"],
+[1721,4,"朱一貴事件","朱一貴在鳳山起事，一度攻下府城，是清代臺灣三大民變之一。","社會","sword"],
+[1786,11,"林爽文事件","天地會領袖林爽文起事，戰事延續一年多，清廷調派大軍才平定，為清代規模最大的民變。","社會","sword"],
+[1860,0,"開港通商","依《天津條約》，1860 年代陸續開放淡水、雞籠、安平、打狗等港口，茶、糖、樟腦大量外銷。","經濟","tea"],
+[1874,5,"牡丹社事件","日本以琉球漂流民遇害為由出兵恆春半島，清廷此後更重視臺灣防務。","國際","shield"],
+[1884,8,"清法戰爭","法軍進攻基隆、淡水，並一度封鎖臺灣海峽；淡水之役清軍擊退法軍登陸。","國際","shield"],
+[1885,10,"臺灣建省","臺灣自福建分出，獨立設省，劉銘傳為首任巡撫，推動鐵路、電報、郵政等新政。","政治","scroll"],
+[1891,10,"基隆—臺北鐵路通車","劉銘傳主持興建的臺灣第一條鐵路通車，1893 年延伸到新竹。","經濟","steam"],
+[1895,4,"馬關條約割臺","清朝在甲午戰爭戰敗，簽約將臺灣、澎湖割讓給日本。","國際","scroll"],
+[1895,5,"臺灣民主國與乙未戰爭","臺灣官紳成立臺灣民主國抵抗接收，各地義軍與日軍激戰數月，傷亡慘重。","政治","flag"],
+[1898,3,"後藤新平任民政長官","推動土地與戶口調查、衛生、專賣與基礎建設，奠定殖民統治體制。","政治","book"],
+[1908,4,"縱貫鐵路全線通車","基隆到打狗（今高雄）的縱貫鐵路全線通車，西部交通一線串連。","經濟","steam"],
+[1915,8,"西來庵事件","余清芳等人以宗教號召武裝抗日，在噍吧哖（今臺南玉井）遭鎮壓，是日治時期最大規模的漢人武裝抗日。","社會","sword"],
+[1921,10,"臺灣文化協會成立","蔣渭水、林獻堂等人成立文化協會，以講座、讀報、戲劇推動啟蒙，開啟非武裝抗日的時代。","文化","book"],
+[1926,5,"「蓬萊米」命名","臺灣總督伊澤多喜男將在臺改良成功的稉稻命名為蓬萊米，此後大量輸往日本，與糖並列臺灣經濟支柱。","經濟","rice"],
+[1926,6,"臺灣農民組合成立","各地蔗農、佃農組織串連成全島性團體，對抗製糖會社與地主，農民運動進入高峰。","社會","farm"],
+[1927,7,"臺灣民眾黨成立","蔣渭水等人創立臺灣第一個現代政黨。同年臺灣文化協會左右分裂，抗日運動路線分化。","政治","flag"],
+[1930,5,"嘉南大圳完工","八田與一主持的烏山頭水庫與嘉南大圳完工，灌溉約 15 萬甲農地，嘉南平原成為米倉。","經濟","water"],
+[1930,10,"霧社事件","莫那．魯道率賽德克族人於霧社公學校運動會起事，日軍以飛機、毒氣鎮壓，迫使總督府調整理蕃政策。","社會","mountain"],
+[1931,2,"臺灣民眾黨遭禁","總督府下令解散民眾黨，同年蔣渭水病逝。政治結社空間急速緊縮。","政治","lock"],
+[1934,6,"日月潭發電所完工","日月潭第一發電所竣工，電力大增，為臺灣工業化奠下基礎。","經濟","power"],
+[1934,9,"議會請願運動終止","歷時 14 年、共 15 次向帝國議會請願設置「臺灣議會」的運動，在壓力下宣告停止。","政治","scroll"],
+[1935,4,"新竹—臺中大地震","規模 7.1 的地震重創新竹、臺中一帶，逾 3,200 人罹難，是臺灣有紀錄以來死亡最多的地震。","災害","quake"],
+[1935,10,"始政四十周年臺灣博覽會","總督府於臺北舉辦大型博覽會，展示殖民統治「成果」，吸引數十萬人次參觀。","文化","fair"],
+[1935,11,"臺灣首次地方選舉","市會及街庄協議會員半數開放民選，雖限制重重，仍是臺灣史上第一次選舉。","政治","vote"],
+[1937,7,"中日戰爭與皇民化運動","戰爭爆發後，總督府推行國語（日語）家庭、改日本姓名、寺廟整理等政策，同化壓力全面升高。","政治","book"],
+[1942,4,"陸軍特別志願兵制度","臺灣青年開始被動員投入戰場；1945 年起更全面實施徵兵。","社會","shield"],
+[1945,5,"臺北大空襲","5 月 31 日美軍大規模轟炸臺北，總督府等建物嚴重受損，數千人傷亡。","災害","plane"],
+[1945,10,"終戰與受降","8 月日本投降。10 月 25 日於臺北公會堂舉行受降典禮，國民政府接收臺灣，日治時期結束。","政治","peace"],
+[1947,2,"二二八事件","臺北緝菸衝突引爆全島抗爭，政府調派軍隊鎮壓，大量臺籍菁英與民眾遇害，影響深遠。","政治","candle"],
+[1949,4,"三七五減租","耕地地租上限定為主要作物收穫量的 37.5%，揭開土地改革序幕。","經濟","farm"],
+[1949,5,"實施戒嚴","5 月 20 日起臺灣省全境戒嚴，直到 1987 年才解除，是世界上最長的戒嚴之一。","政治","lock"],
+[1949,6,"發行新臺幣","以舊臺幣四萬元兌新臺幣一元，遏止戰後惡性通貨膨脹。","經濟","coin"],
+[1949,12,"中央政府遷臺","國共內戰失利，中華民國中央政府遷至臺北，大批軍民隨之來臺。","政治","ship"],
+[1950,6,"韓戰與第七艦隊","韓戰爆發，美國派第七艦隊巡弋臺灣海峽，臺灣被納入冷戰圍堵體系。白色恐怖也在此時期達到高峰。","國際","ship"],
+[1951,1,"美援開始","至 1965 年，美國每年平均提供約 1 億美元援助，支撐財政、基礎建設與工業發展。","經濟","handshake"],
+[1953,1,"耕者有其田","政府徵收地主超額耕地轉放佃農，自耕農大增，地主資本轉向工商業。","經濟","farm"],
+[1954,12,"中美共同防禦條約","中華民國與美國簽訂共同防禦條約，奠定此後二十多年的安全保障。","國際","shield"],
+[1958,8,"八二三砲戰","解放軍對金門猛烈砲擊，兩個月內落彈數十萬發，國軍守住金門。","國際","shield"],
+[1959,8,"八七水災","颱風引發中南部大水，數百人罹難，為戰後最嚴重的水災之一。","災害","storm"],
+[1960,9,"雷震案","籌組「中國民主黨」的《自由中國》發行人雷震被捕判刑，雜誌停刊，組黨運動受挫。","政治","news"],
+[1962,10,"臺灣電視公司開播","臺灣第一家電視台開播，電視逐漸進入家庭，改變大眾娛樂與資訊傳播。","文化","tv"],
+[1964,6,"石門水庫完工","桃園石門水庫竣工，提供北臺灣灌溉、供水、發電與防洪。","經濟","dam"],
+[1966,12,"高雄加工出口區","全球最早的加工出口區之一在高雄設立，吸引外資，帶動出口導向工業化。","經濟","factory"],
+[1968,8,"紅葉少棒擊敗日本","臺東紅葉少棒擊敗來訪的日本冠軍隊，掀起全民棒球熱；隔年金龍少棒奪得世界冠軍。","文化","baseball"],
+[1968,9,"九年國民義務教育","義務教育由六年延長為九年，大幅提升國民教育程度與勞動力素質。","社會","book"],
+[1971,10,"退出聯合國","聯合國大會通過 2758 號決議，中華民國代表退出聯合國，外交處境急轉直下。","國際","globe"],
+[1972,9,"臺日斷交","日本與中華人民共和國建交，臺日轉為以民間機構維持實質關係。","國際","globe"],
+[1973,11,"十大建設","行政院長蔣經國宣布推動高速公路、鐵路電氣化、中正機場、中鋼、核電廠等十大建設。","經濟","factory"],
+[1975,4,"蔣中正逝世","執政二十六年的總統蔣中正病逝，嚴家淦繼任，實權逐步移交蔣經國。","政治","candle"],
+[1978,10,"中山高速公路全線通車","基隆至高雄的高速公路全線通車，南北交通時間大幅縮短。","經濟","road"],
+[1979,1,"臺美斷交","美國與中華人民共和國建交，同年 4 月通過《臺灣關係法》維持非官方關係。","國際","globe"],
+[1979,12,"美麗島事件","高雄國際人權日遊行遭鎮壓，黨外人士大舉被捕受審，反而促使更多人投入民主運動。","政治","people"],
+[1980,12,"新竹科學園區","臺灣第一座科學工業園區成立，成為日後半導體與電子產業的搖籃。","經濟","chip"],
+[1986,9,"民主進步黨成立","黨外人士在戒嚴下突破黨禁，宣布成立民進黨，政府最終未加取締。","政治","flag"],
+[1987,2,"台積電成立","張忠謀創立台灣積體電路製造公司，開創晶圓代工模式，日後成為全球半導體核心。","經濟","chip"],
+[1987,7,"解除戒嚴","7 月 15 日零時解嚴，結束 38 年戒嚴體制；同年 11 月開放民眾赴大陸探親。","政治","unlock"],
+[1988,1,"報禁解除・蔣經國逝世","元旦解除報禁，新報紙紛紛創刊。1 月 13 日蔣經國病逝，李登輝成為首位臺籍總統。","政治","news"],
+[1990,3,"野百合學運","數千名學生靜坐中正紀念堂，要求解散國民大會、召開國是會議，推動憲政改革。","社會","lily"],
+[1991,5,"終止動員戡亂時期","廢止《動員戡亂時期臨時條款》，年底萬年國代全面退職，國會走向全面改選。","政治","scroll"],
+[1992,5,"修正刑法一百條","廢除「言論內亂罪」，思想與言論入罪的時代結束；同年底立法委員首次全面改選。","政治","unlock"],
+[1995,3,"全民健康保險","全民健保開辦，納保率很快超過九成，成為臺灣重要的社會安全制度。","社會","health"],
+[1996,3,"首次總統直選","臺灣人首次直接選出總統，李登輝當選；選前中國試射飛彈，引發臺海危機。","政治","vote"],
+[1996,3,"臺北捷運首線通車","木柵線（今文湖線）通車，臺北進入捷運時代。","社會","metro"],
+[1999,9,"九二一大地震","9 月 21 日凌晨規模 7.3 的地震重創中部，2,400 多人罹難，重建工程延續多年。","災害","quake"],
+[2000,3,"首次政黨輪替","陳水扁當選總統，國民黨結束在臺灣 55 年的執政，政權和平移轉。","政治","vote"],
+[2002,1,"加入世界貿易組織","以「臺澎金馬個別關稅領域」名義正式成為 WTO 會員。","國際","handshake"],
+[2003,4,"SARS 疫情","臺北和平醫院封院，社會經歷嚴峻防疫考驗，也促成日後防疫體制的建立。","災害","mask"],
+[2004,12,"臺北 101 落成","高 508 公尺，至 2010 年前為世界最高建築，成為臺灣地標。","文化","tower"],
+[2007,1,"臺灣高鐵通車","臺北至高雄最快約 90 分鐘，西部形成一日生活圈。","經濟","hsr"],
+[2008,5,"第二次政黨輪替","馬英九就任總統；同年 12 月兩岸實現海運、空運直航與直接通郵。","政治","plane2"],
+[2009,8,"莫拉克颱風（八八風災）","豪雨造成南部嚴重土石流與水災，高雄小林村滅村，近 700 人罹難或失蹤。","災害","storm"],
+[2014,3,"太陽花學運","抗議《海峽兩岸服務貿易協議》審查程序，學生與公民占領立法院 24 天。","社會","sunflower"],
+[2016,5,"首位女性總統","蔡英文就任總統，民進黨首次同時取得行政與立法多數。","政治","woman"],
+[2017,8,"臺北世大運","臺灣主辦的最大型國際綜合運動賽會，中華隊奪得 26 金。","文化","medal"],
+[2019,5,"同性婚姻合法化","依釋字第 748 號解釋施行專法，臺灣成為亞洲第一個同性婚姻合法化的國家。","社會","rainbow"],
+[2020,1,"COVID-19 防疫","疫情初期即實施邊境管制與口罩配給，2020 年經濟逆勢成長。","災害","mask"],
+[2024,4,"花蓮大地震","4 月 3 日規模 7.2 地震，為九二一以來最強，太魯閣地區受創嚴重。","災害","quake"],
+[2024,5,"賴清德就任總統","同一政黨首次連續三屆執政。","政治","vote"],
+[2025,5,"核三廠停機","最後一部核電機組停機，臺灣進入無核發電狀態，能源政策持續引發討論。","經濟","leaf"],
+[2025,7,"大罷免投票","7 月與 8 月兩波針對多位立法委員的罷免投票，皆未達通過門檻。","政治","vote"]
+];
+// 分段時間比例：越近代越放大
+const SEG=[[-50000,-4000,0,10],[-4000,1600,10,20],[1600,1895,20,42],[1895,1945,42,56],[1945,END,56,100]];
+function toU(y){for(const [a,b,u0,u1] of SEG){if(y<=b)return u0+(Math.max(y,a)-a)/(b-a)*(u1-u0);}return 100;}
+function fromU(u){for(const [a,b,u0,u1] of SEG){if(u<=u1)return a+(Math.max(u,u0)-u0)/(u1-u0)*(b-a);}return END;}
+const EV=RAW.map(([y,m,t,d,c,k,lab,short],i)=>({y,m,t,d,c,k,lab,short,p:toU(y+(m?(m-0.5)/12:0.5)),i}));
+const eraOf=y=>ERAS.find(e=>y>=e.s&&y<e.e)||ERAS[ERAS.length-1];
+const QING=[["康熙",1662],["雍正",1723],["乾隆",1736],["嘉慶",1796],["道光",1821],["咸豐",1851],["同治",1862],["光緒",1875]];
+function qing(y){let r=QING[0];for(const q of QING)if(y>=q[1])r=q;return `${r[0]} ${y-r[1]+1} 年`;}
+function cal(y){
+  if(y<1600) return (y<-4000?"舊石器時代":y<0?"新石器時代":y<1500?"金屬器時代":"原住民族部落社會")+" · 考古推定";
+  if(y<1624) return "西元紀年 · 尚無統一政權";
+  if(y<1662) return "荷蘭東印度公司治理（南部）";
+  if(y<=1683) return `明鄭 永曆 ${y-1646} 年`;
+  if(y<1895) return "清 "+qing(y);
+  if(y===1895) return "光緒 21 年 · 明治 28 年";
+  if(y<1912) return `明治 ${y-1867} 年`;
+  if(y===1912) return "明治 45 年 · 大正元年";
+  if(y<1926) return `大正 ${y-1911} 年`;
+  if(y===1926) return "大正 15 年 · 昭和元年";
+  if(y<1945) return `昭和 ${y-1925} 年`;
+  if(y===1945) return "昭和 20 年 · 民國 34 年";
+  return `民國 ${y-1911} 年`;
+}
+function bigYear(y){
+  if(y>=1600) return {txt:String(Math.min(2026,Math.floor(y))),long:false};
+  const bp=2026-y;
+  if(bp>=10000) return {txt:`${(Math.round(bp/1000)/10).toString()} 萬年前`,long:true};
+  return {txt:`${(Math.round(bp/100)*100).toLocaleString()} 年前`,long:true};
+}
+const evDate=ev=>ev.lab||`${ev.y} 年${ev.m?` ${ev.m} 月`:""}`;
+$("nEv").textContent=EV.length;
+const bands=$("bands"), dots=$("dots"), ticks=$("ticks");
+ERAS.forEach(e=>{const d=document.createElement("div");d.style.width=(toU(e.e)-toU(e.s))+"%";d.style.background=`var(${e.c})`;d.title=e.n;bands.appendChild(d);});
+[[ -50000,"5萬年前","first"],[-4000,"6千年前",""],[1600,"1600",""],[1700,"1700","odd"],[1800,"1800","odd"],[1895,"1895",""],[1945,"1945",""],[1970,"1970","odd"],[2000,"2000",""],[END,"今","last"]]
+  .forEach(([y,l,c])=>{const t=document.createElement("div");t.className="tick "+c;t.style.left=toU(y)+"%";t.textContent=l;ticks.appendChild(t);});
+[10,20,42,56].forEach(u=>{const b=document.createElement("div");b.className="brk";b.style.left=u+"%";$("track").appendChild(b);});
+const dotEls=EV.map(ev=>{const d=document.createElement("div");d.className="dot";d.style.left=ev.p+"%";d.title=evDate(ev)+" "+ev.t;dots.appendChild(d);return d;});
+$("legend").innerHTML=ERAS.map(e=>`<span><b style="background:var(${e.c})"></b>${e.n}</span>`).join("");
+const reduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+const rowEls=[];
+ERAS.forEach(era=>{
+  const sec=document.createElement("div");sec.className="era-sec";sec.style.setProperty("--era-c",`var(${era.c})`);
+  sec.innerHTML=`<h3>${era.n}<em>${era.r}</em></h3><p class="lede">${era.lede}</p>`;
+  EV.filter(ev=>eraOf(fromU(ev.p))===era).forEach(ev=>{
+    const r=document.createElement("div");r.className="row";r.tabIndex=0;
+    const yc=ev.short?`${ev.short}`:`${ev.y}<small>${ev.m?ev.m+" 月":"&nbsp;"}</small>`;
+    r.innerHTML=`<div class="ic">${icon(ev.k)}</div><div class="y">${yc}</div><div class="t">${ev.t}</div><span class="chip" style="--chip:var(${CAT[ev.c]})">${ev.c}</span><div class="d">${ev.lab?ev.lab+"。":""}${ev.d}</div>`;
+    const go=()=>{jumpTo(ev.i);window.scrollTo({top:0,behavior:reduced?"auto":"smooth"});};
+    r.addEventListener("click",go);r.addEventListener("keydown",k=>{if(k.key==="Enter"){k.preventDefault();go();}});
+    rowEls[ev.i]=r;sec.appendChild(r);
+  });
+  $("list").appendChild(sec);
+});
+
+let u=0, idx=-1, playing=false, speed=1, dwell=0, last=0, lastU=0;
+const RATE=1.3, DWELL=3.2; // RATE：每秒推進的軌道百分比
+function hop(el){if(reduced)return;el.classList.remove("hop");void el.getBoundingClientRect();el.classList.add("hop");}
+function showEvent(i,fx=true){
+  dotEls.forEach((d,k)=>{d.classList.toggle("past",k<=i);d.classList.toggle("cur",k===i);});
+  rowEls.forEach((r,k)=>r.classList.toggle("cur",k===i));
+  const card=$("card");
+  if(i<0){$("art").innerHTML=icon("sun");$("cTitle").textContent="故事，從一塊化石開始";$("cDesc").textContent="在還沒有文字的年代，臺灣已經有人類活動。按「播放」從史前一路走到 2026 年，每遇到一件大事就停下來說明。";$("cDate").textContent="史前";$("cCat").textContent="序";$("cCat").style.setProperty("--chip","var(--accent)");$("cCount").textContent=`共 ${EV.length} 件`;$("bubble").textContent="嗨！我是小藍鵲，帶你從遠古飛到現在～";card.style.setProperty("--era-c",`var(${ERAS[0].c})`);return;}
+  const ev=EV[i], era=eraOf(fromU(ev.p));
+  $("art").innerHTML=icon(ev.k);
+  $("cDate").textContent=`${evDate(ev)} · ${cal(ev.y)}`;
+  $("cCat").textContent=ev.c;$("cCat").style.setProperty("--chip",`var(${CAT[ev.c]})`);
+  $("cTitle").textContent=ev.t;$("cDesc").textContent=ev.d;
+  $("cCount").textContent=`第 ${i+1} / ${EV.length} 件`;
+  const s=SAY[ev.c];$("bubble").textContent=s[i%s.length];
+  card.style.setProperty("--era-c",`var(${era.c})`);
+  if(fx&&!reduced){card.classList.remove("in");void card.offsetWidth;card.classList.add("in");hop($("guideBird"));hop($("trackBird"));
+    const rp=document.createElement("div");rp.className="ripple";rp.style.left=ev.p+"%";$("track").appendChild(rp);setTimeout(()=>rp.remove(),1100);}
+}
+function render(){
+  const y=fromU(u), era=eraOf(y), by=bigYear(y), yi=Math.floor(y);
+  const ye=$("year");ye.textContent=by.txt;ye.classList.toggle("long",by.long);
+  $("cal").textContent=cal(yi);
+  $("eraNow").textContent=era.n;
+  $("clock").style.setProperty("--era-c",`var(${era.c})`);
+  const h=$("head");h.style.left=u+"%";
+  if(Math.abs(u-lastU)>.05){h.classList.toggle("flip",u<lastU);lastU=u;}
+  $("fill").style.width=u+"%";
+  const tr=$("track");tr.setAttribute("aria-valuenow",Math.round(u));tr.setAttribute("aria-valuetext",`${by.txt}，${era.n}`);
+}
+function setPlaying(p){playing=p;if(p&&u>=99.99&&idx>=EV.length-1){u=0;idx=-1;showEvent(-1);}
+  $("play").innerHTML=p?"❚❚ 暫停":"▶ 播放";$("play").setAttribute("aria-label",p?"暫停":"播放");last=performance.now();}
+function idxAt(x){let k=-1;for(const ev of EV){if(ev.p<=x+1e-6)k=ev.i;else break;}return k;}
+function seek(x,fx=false){u=Math.max(0,Math.min(100,x));const k=idxAt(u);if(k!==idx){idx=k;showEvent(idx,fx);}dwell=0;render();}
+function jumpTo(i){i=Math.max(-1,Math.min(EV.length-1,i));idx=i;u=i<0?0:EV[i].p;showEvent(i,true);dwell=DWELL;render();}
+function frame(now){
+  const dt=Math.min(.1,(now-last)/1000);last=now;
+  if(playing){
+    if(dwell>0){dwell-=dt*speed;}
+    else{
+      const nx=EV[idx+1];u+=dt*RATE*speed;
+      if(nx&&u>=nx.p){u=nx.p;idx++;showEvent(idx);dwell=DWELL;}
+      if(!nx&&u>=100){u=100;setPlaying(false);$("bubble").textContent="飛到 2026 年囉！接下來的歷史，換你來寫～";}
+      render();
+    }
+  }
+  requestAnimationFrame(frame);
+}
+$("play").onclick=()=>setPlaying(!playing);
+$("prev").onclick=()=>{const at=idx<0||Math.abs(u-EV[idx].p)<.01;jumpTo(at?idx-1:idx);};
+$("next").onclick=()=>jumpTo(idx+1);
+$("restart").onclick=()=>{jumpTo(-1);dwell=0;setPlaying(true);};
+document.querySelectorAll(".speed button").forEach(b=>b.onclick=()=>{speed=+b.dataset.s;document.querySelectorAll(".speed button").forEach(x=>x.setAttribute("aria-pressed",x===b));});
+const track=$("track");
+const posX=e=>{const r=track.getBoundingClientRect();return (e.clientX-r.left)/r.width*100;};
+let dragging=false, wasPlaying=false;
+track.addEventListener("pointerdown",e=>{dragging=true;wasPlaying=playing;playing=false;track.setPointerCapture(e.pointerId);seek(posX(e));});
+track.addEventListener("pointermove",e=>{if(dragging)seek(posX(e));});
+const endDrag=()=>{if(!dragging)return;dragging=false;if(idx>=0)showEvent(idx,true);if(wasPlaying)setPlaying(true);};
+track.addEventListener("pointerup",endDrag);track.addEventListener("pointercancel",endDrag);
+document.addEventListener("keydown",e=>{
+  if(e.target.closest&&e.target.closest("button,.row"))return;
+  if(e.key===" "){e.preventDefault();setPlaying(!playing);}
+  else if(e.key==="ArrowRight"){e.preventDefault();jumpTo(idx+1);}
+  else if(e.key==="ArrowLeft"){e.preventDefault();jumpTo(idx-1);}
+});
+showEvent(-1,false);render();requestAnimationFrame(n=>{last=n;frame(n);});
+if(!reduced)setTimeout(()=>setPlaying(true),900);
+</script>
+</body>
+</html>
